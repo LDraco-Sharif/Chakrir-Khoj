@@ -1,0 +1,57 @@
+<div class="page">
+  <div class="content">
+    <mat-form-field class="filter">
+      <mat-label>Filter</mat-label>
+      <input type="text" matInput placeholder="Filter by name..." [ngModel]="filterValue" (ngModelChange)="filterByName($event)">
+    </mat-form-field>
+    
+    <table mat-table [dataSource]="officeList" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef> Location </th>
+        <td mat-cell *matCellDef="let element">
+          @if(element.location){
+          <a [href]="element.location" mat-icon-button><mat-icon>location_on</mat-icon></a>
+          }
+          @else {
+          <i>Unavailable</i>
+          }
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="link">
+        <th mat-header-cell *matHeaderCellDef> Website Link </th>
+        <td mat-cell *matCellDef="let element">
+          @if(element.link) {
+          <a [href]="element.link" mat-icon-button [title]="element.link"><mat-icon>web</mat-icon></a>
+          }
+          @else {
+            <i>Unavailable</i>
+          }
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="careerLink">
+        <th mat-header-cell *matHeaderCellDef> Career/Job Post Link </th>
+        <td mat-cell *matCellDef="let element">
+          @if (element.careerLink) {
+            <a [href]="element.careerLink" mat-icon-button [title]="element.careerLink"><mat-icon>search</mat-icon></a>
+          }
+          @else {
+            <i>Unavailable</i>
+          }
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+
+
+
